@@ -74,8 +74,7 @@
       object-position: center;
       border: 1px solid rgba(201, 169, 110, 0.45);
       background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(2px);
-      box-shadow: 0 12px 26px rgba(42, 18, 24, 0.25);
+      box-shadow: 0 8px 18px rgba(42, 18, 24, 0.2);
       padding: 2px;
     }
 
@@ -100,8 +99,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(250, 247, 242, 0.92);
-      backdrop-filter: blur(10px);
+      background: rgba(250, 247, 242, 0.98);
       border-bottom: 1px solid rgba(201, 169, 110, 0.32);
     }
 
@@ -180,14 +178,6 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: clamp(1rem, 2vw, 1.5rem);
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 400ms ease, transform 400ms ease;
-    }
-
-    section.menu-section.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .section-title-wrap {
@@ -234,6 +224,13 @@
     .menu-item:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 22px rgba(42, 18, 24, 0.11);
+    }
+
+    @media (hover: none) {
+      .menu-item:hover {
+        transform: none;
+        box-shadow: none;
+      }
     }
 
     .menu-item-line {
@@ -346,8 +343,6 @@
       .hero-logo { display: none; }
 
       section.menu-section {
-        opacity: 1 !important;
-        transform: none !important;
         box-shadow: none;
         border: 1px solid #ddd;
         break-inside: avoid;
@@ -1206,16 +1201,6 @@ WHISKEY SOUR
       root.appendChild(section);
       });
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08, rootMargin: "0px 0px -32px 0px" });
-
-      document.querySelectorAll(".menu-section").forEach((el) => observer.observe(el));
     }
 
     function setLang(lang) {
