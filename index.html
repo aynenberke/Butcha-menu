@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Butcha Steakhouse icecek menusu - premium alkol seckileri.">
+  <title>Butcha Steakhouse | İçecek Menüsü</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #5C1F2E;
+      --secondary: #722F3F;
+      --accent: #8B3A4F;
+      --bg: #FAF7F2;
+      --card: #FFFFFF;
+      --text: #2A1218;
+      --muted: #6F5A60;
+      --gold: #C9A96E;
+      --radius: 16px;
+      --shadow: 0 8px 30px rgba(42, 18, 24, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "DM Sans", "Inter", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: min(1160px, 92vw);
+      margin-inline: auto;
+    }
+
+    header.hero {
+      background: linear-gradient(145deg, #45121f 0%, var(--primary) 42%, var(--secondary) 100%);
+      color: #fff;
+      padding: 4rem 1rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto auto -80px -80px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 169, 110, 0.17), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      inset: -80px -80px auto auto;
+    }
+
+    .hero-logo {
+      width: clamp(94px, 10vw, 126px);
+      height: clamp(94px, 10vw, 126px);
+      border-radius: 999px;
+      margin: 0 auto 1rem;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      border: 1px solid rgba(201, 169, 110, 0.45);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(2px);
+      box-shadow: 0 12px 26px rgba(42, 18, 24, 0.25);
+      padding: 2px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .hero p {
+      margin: 0.6rem auto 0;
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      color: #f7e8ea;
+      max-width: 50ch;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+    }
+
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201, 169, 110, 0.32);
+    }
+
+    .sticky-nav ul {
+      margin: 0;
+      padding: 0.75rem 0;
+      list-style: none;
+      display: flex;
+      gap: 0.45rem;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .nav-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding-top: 0.65rem;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      border: 1px solid rgba(92, 31, 46, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .lang-btn {
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      padding: 0.42rem 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.8rem;
+      letter-spacing: 0.03em;
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .sticky-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      text-decoration: none;
+      color: var(--text);
+      background: #fff;
+      border: 1px solid rgba(92, 31, 46, 0.14);
+      padding: 0.5rem 0.85rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      font-size: 0.9rem;
+      transition: 180ms ease;
+    }
+
+    .sticky-nav a:hover,
+    .sticky-nav a:focus-visible {
+      border-color: rgba(92, 31, 46, 0.3);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    main {
+      padding: 1.2rem 0 2.2rem;
+    }
+
+    section.menu-section {
+      margin-top: 1.7rem;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(1rem, 2vw, 1.5rem);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 400ms ease, transform 400ms ease;
+    }
+
+    section.menu-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title-wrap {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .gold-line {
+      height: 1px;
+      width: min(250px, 80%);
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0.4rem auto;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.3rem, 2.8vw, 1.8rem);
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      gap: 0.45rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .items-grid {
+      display: grid;
+      gap: 0.7rem 1rem;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 820px) {
+      .items-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .menu-item {
+      padding: 0.8rem 0.85rem;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #fff, #fefcfa);
+      border: 1px solid rgba(92, 31, 46, 0.08);
+      transition: transform 160ms ease, box-shadow 180ms ease;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(42, 18, 24, 0.11);
+    }
+
+    .menu-item-line {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .item-name {
+      font-weight: 700;
+      color: var(--text);
+      min-width: 0;
+      flex: 0 1 auto;
+    }
+
+    .dots {
+      flex: 1;
+      border-bottom: 1px dotted rgba(42, 18, 24, 0.35);
+      transform: translateY(-2px);
+      min-width: 12px;
+    }
+
+    .price {
+      font-weight: 700;
+      color: var(--primary);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .item-desc {
+      margin-top: 0.28rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    footer {
+      margin-top: 2rem;
+      background: #fff;
+      border-top: 1px solid rgba(92, 31, 46, 0.12);
+      padding: 1.4rem 0 1.8rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 0.8rem;
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    @media (min-width: 760px) {
+      .footer-grid { grid-template-columns: 2fr 1fr; }
+    }
+
+    .footer-title {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: 1.2rem;
+    }
+
+    .footer-meta {
+      margin: 0.25rem 0 0;
+      color: #51333b;
+      font-size: 0.95rem;
+    }
+
+    .socials {
+      display: flex;
+      gap: 0.6rem;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid rgba(92, 31, 46, 0.2);
+      display: inline-grid;
+      place-items: center;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .disclaimer {
+      margin-top: 0.8rem;
+      color: #775860;
+      font-size: 0.84rem;
+    }
+
+    @media print {
+      .sticky-nav,
+      .socials {
+        display: none !important;
+      }
+
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      .hero {
+        background: #fff !important;
+        color: #000 !important;
+        padding: 0 0 0.8rem !important;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .hero p,
+      .hero-logo { display: none; }
+
+      section.menu-section {
+        opacity: 1 !important;
+        transform: none !important;
+        box-shadow: none;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+      }
+
+      .price {
+        color: #000;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" aria-label="İçecek Menüsü üst alanı">
+    <div class="container">
+      <img class="hero-logo" src="./butcha-logo.png" alt="Butcha Steakhouse logosu" loading="lazy">
+      <h1 data-i18n="heroTitle">İçecek Menüsü</h1>
+      <p data-i18n="heroSubtitle">Butcha Steakhouse - Seçkin alkollü içecek koleksiyonu</p>
+    </div>
+  </header>
+
+  <nav class="sticky-nav" aria-label="Kategori navigasyonu">
+    <div class="container">
+      <div class="nav-top">
+        <div class="lang-switch" role="group" aria-label="Dil seçimi">
+          <button id="langTr" class="lang-btn active" aria-pressed="true">TR</button>
+          <button id="langEn" class="lang-btn" aria-pressed="false">EN</button>
+        </div>
+      </div>
+      <ul id="categoryNav"></ul>
+    </div>
+  </nav>
+
+  <main class="container" id="menuRoot" aria-live="polite"></main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <h2 class="footer-title">Butcha Steakhouse</h2>
+        <p class="footer-meta" data-i18n="phone">Telefon: +90 (5__) ___ __ __</p>
+        <p class="footer-meta" data-i18n="address">Adres: [Adres Bilgisi Placeholder], Türkiye</p>
+        <p class="disclaimer" data-i18n="warning">21 yaş altına alkollü içecek satışı yasaktır.</p>
+      </div>
+      <div>
+        <p class="footer-meta" style="margin-top:0;" data-i18n="social">Sosyal Medya</p>
+        <div class="socials" aria-label="Sosyal medya bağlantıları">
+          <a class="social-link" href="#" aria-label="Instagram" title="Instagram"><i data-lucide="instagram"></i></a>
+          <a class="social-link" href="#" aria-label="Facebook" title="Facebook"><i data-lucide="facebook"></i></a>
+          <a class="social-link" href="#" aria-label="Youtube" title="Youtube"><i data-lucide="youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    const rawMenu = `RAKILAR
+ALA RAKI 20CL
+₺1,190.00
+ALA RAKI 35CL
+₺1,930.00
+ALA RAKI 70CL
+₺3,630.00
+ALTINBAS 24 AYAR 70CL
+₺4,210.00
+ALTINBAS RAKI 35CL
+₺1,820.00
+ALTINBAS RAKI 70CL
+₺3,360.00
+BEYLERBEYI GOBEK RAKI TEK
+₺420.00
+BEYLERBEYI GOBEK RAKI DUBLE
+₺610.00
+BEYLERBEYI GOBEK RAKI 20CL
+₺1,590.00
+BEYLERBEYI GOBEK RAKI 35CL
+₺2,650.00
+BEYLERBEYI GOBEK RAKI 50CL
+₺3,730.00
+BEYLERBEYI GOBEK RAKI 70CL
+₺4,690.00
+MERCAN GOBEK RAKI 35CL
+₺2,540.00
+BEYLERBEYI K.KARASI 70CL
+₺4,090.00
+BEYLERBEYI MAVI 20CL
+₺1,310.00
+BEYLERBEYI MAVI 35CL
+₺1,940.00
+BEYLERBEYI MAVI 50CL
+₺2,650.00
+BEYLERBEYI MAVI 70CL
+₺3,590.00
+BEYLERBEYI TERAGOLD 20CL
+₺1,520.00
+BEYLERBEYI TERAGOLD 35CL
+₺2,280.00
+BEYLERBEYI TERAGOLD 50CL
+₺3,210.00
+BEYLERBEYI TERAGOLD 70CL
+₺4,250.00
+EFE GOBEK 20CL
+₺1,540.00
+EFE GOBEK 35CL
+₺2,430.00
+EFE GOBEK 50CL
+₺3,320.00
+EFE GOBEK 70CL
+₺4,490.00
+EFE GOLD TEK
+₺380.00
+EFE GOLD DUBLE
+₺610.00
+EFE GOLD 20CL
+₺1,480.00
+EFE GOLD 35CL
+₺2,120.00
+EFE GOLD 50CL
+₺3,060.00
+EFE GOLD 70CL
+₺4,020.00
+EFE IMBIK RAKI 35CL
+₺2,450.00
+EFE IMBIK RAKI 70CL
+₺4,490.00
+IZMIR GOBEK RAKI 35CL
+₺1,810.00
+IZMIR GOBEK RAKI 70CL
+₺3,210.00
+KULUP RAKI 35CL
+₺2,110.00
+KULUP RAKI 70CL
+₺3,780.00
+KULUP RAKI OZEL SERI 70CL
+₺11,020.00
+MERCAN GOBEK RAKI 20CL
+₺1,540.00
+MERCAN GOBEK RAKI 35CL
+₺2,540.00
+MERCAN GOBEK RAKI 50CL
+₺3,590.00
+MERCAN GOBEK RAKI 70CL
+₺4,520.00
+PROTOTIP RAKI 70CL
+₺6,050.00
+SAKI GOLD 35CL
+₺2,340.00
+SAKI GOLD 70CL
+₺4,160.00
+SAKI SIYAH UZUM 35CL
+₺2,330.00
+SAKI SIYAH UZUM 50CL
+₺2,910.00
+SAKI SIYAH UZUM 70CL
+₺4,310.00
+SARI ZEYBEK 3 MESE 35CL
+₺2,380.00
+SARI ZEYBEK 3 MESE 70CL
+₺4,380.00
+SARI ZEYBEK 35CL
+₺2,420.00
+SARI ZEYBEK 70CL
+₺4,380.00
+TEKIRDAG ALTIN SERI TEK
+₺390.00
+TEKIRDAG ALTIN SERI DUBLE
+₺590.00
+TEKIRDAG ALTIN SERI 20CL
+₺1,530.00
+TEKIRDAG ALTIN SERI 35CL
+₺2,150.00
+TEKIRDAG ALTIN SERI 50CL
+₺2,880.00
+TEKIRDAG ALTIN SERI 70CL
+₺3,990.00
+TEKIRDAG GOLD REZERV 35CL
+₺2,190.00
+TEKIRDAG GOLD REZERV 70CL
+₺4,140.00
+TEKIRDAG RAKI TEK
+₺340.00
+TEKIRDAG RAKI DUBLE
+₺520.00
+TEKIRDAG RAKI 35CL
+₺1,710.00
+TEKIRDAG RAKI 50CL
+₺2,450.00
+TEKIRDAG RAKI 70CL
+₺3,180.00
+TEKIRDAG RAKI NO10 35CL
+₺2,560.00
+TEKIRDAG RAKI NO10 70CL
+₺4,530.00
+TEKIRDAG TRAKYA SERISI 35CL
+₺1,710.00
+TEKIRDAG TRAKYA SERISI 70CL
+₺3,270.00
+USTALARIN KARISIM 35CL
+₺1,810.00
+USTALARIN KARISIM 50CL
+₺2,540.00
+USTALARIN KARISIM 70CL
+₺3,320.00
+UZUN DEMLEME 20CL
+₺1,410.00
+UZUN DEMLEME 35CL
+₺2,020.00
+UZUN DEMLEME 50CL
+₺2,690.00
+UZUN DEMLEME 70CL
+₺3,730.00
+YENI RAKI TEK
+₺310.00
+YENI RAKI DUBLE
+₺460.00
+YENI RAKI 20CL
+₺1,220.00
+YENI RAKI 35CL
+₺1,830.00
+YENI RAKI 50CL
+₺2,210.00
+YENI RAKI 70CL
+₺2,990.00
+YENI RAKI BEYKOZ 70CL
+₺3,070.00
+YENI RAKI GIZ 50CL
+₺4,530.00
+YENI RAKI MUZEYYEN 70CL
+₺3,070.00
+YENI RAKI YENI SERI TEK
+₺330.00
+YENI RAKI YENI SERI DUBLE
+₺490.00
+YENI RAKI YENI SERI 20CL
+₺1,210.00
+YENI RAKI YENI SERI 35CL
+₺1,710.00
+YENI RAKI YENI SERI 50CL
+₺2,450.00
+YENI RAKI YENI SERI 70CL
+₺3,210.00
+YENI RAKI REZERV TEK
+₺420.00
+YENI RAKI REZERV DUBLE
+₺610.00
+YENI RAKI REZERV 20CL
+₺1,580.00
+YENI RAKI REZERV 35CL
+₺2,650.00
+YENI RAKI REZERV 50CL
+₺3,730.00
+YENI RAKI REZERV 70CL
+₺4,690.00
+YESIL EFE RAKI TEK
+₺340.00
+YESIL EFE RAKI DUBLE
+₺510.00
+YESIL EFE RAKI 20CL
+₺1,290.00
+YESIL EFE RAKI 35CL
+₺1,840.00
+YESIL EFE RAKI 50CL
+₺2,540.00
+YESIL EFE RAKI 70CL
+₺3,440.00
+BIRALAR
+BOMONTI 50CL
+₺460.00
+EFES OZELSERI 50CL
+₺460.00
+EFES PILSEN 50CL
+₺460.00
+MILLER 33CL
+₺390.00
+BEYAZ ŞARAPLAR
+CIELO PINOT GRIGIO 2021 75CL
+₺2,530.00
+K.DERE CANKAYA 75CL
+₺2,530.00
+K.DERE CANKAYA KADEH
+₺710.00
+K.DERE COT. DAVAN NARINCE 75CL
+₺4,770.00
+K.DERE COT. DAVAN NARINCE KADE
+₺1,230.00
+K.DERE EGEO CHARDONNAY 75CL
+₺3,980.00
+K.DERE EGEO CHARDONNAY KADEH
+₺920.00
+K.DERE EGEO FUME BLANC 75CL
+₺3,980.00
+K.DERE EGEO FUME BLANC KADEH
+₺920.00
+K.DERE EGEO SAUV. BLANC 75CL
+₺3,980.00
+K.DERE EGEO SAUV. BLANC KADEH
+₺920.00
+K.DERE EMIR 75CL
+₺3,980.00
+K.DERE EMIR KADEH
+₺920.00
+K.DERE SELECTION NARINCE 75CL
+₺3,640.00
+K.DERE SELECTION NARINCE KADEH
+₺880.00
+KAYRA VERSVS 75CL
+₺3,170.00
+KAYRA VERSVS KADEH
+₺820.00
+LIKYA ARYK. SAUV. BLANC 75CL
+₺2,770.00
+LIKYA ARYK. SAUV. BLANC KADEH
+₺760.00
+LYKOS VALLEY SAUV. BLANC 75CL
+₺1,980.00
+LYKOS VALLEY SAUV. BLANC KADEH
+₺510.00
+MONTES SAUV. BLANC 75CL
+₺3,020.00
+MONTES SAUV. BLANC KADEH
+₺790.00
+SARAFIN FUME BLANC 75CL
+₺4,310.00
+SARAFIN FUME BLANC KADEH
+₺1,190.00
+SARAFIN SAUV. BLANC 75CL
+₺4,310.00
+SARAFIN SAUV. BLANC KADEH
+₺1,190.00
+SUVLA CHARDONNAY 75CL
+₺3,020.00
+SUVLA CHARDONNAY KADEH
+₺790.00
+SUVLA SAUV. BLANC 75CL
+₺2,850.00
+SUVLA SAUV. BLANC KADEH
+₺750.00
+VILLA DOLUCA KLS. BEYAZ 75CL
+₺2,690.00
+VILLA DOLUCA KLS. BEYAZ KADEH
+₺740.00
+KIRMIZI ŞARAPLAR
+CASELLERO DEL DIABLO 75CL
+₺3,650.00
+CASELLERO DEL DIABLO KADEH
+₺910.00
+DOLUCA KLAS. KIRMIZI 75CL
+₺2,730.00
+DOLUCA KLAS. KIRMIZI KADEH
+₺750.00
+DOLUCA SARAFIN CAB.SAUV. 75C
+₺3,970.00
+DOLUCA SARAFIN CAB.SAUV. KADEH
+₺1,020.00
+DOLUCA SARAFIN MERLOT 75CL
+₺3,970.00
+DOLUCA SARAFIN MERLOT KADEH
+₺1,020.00
+DOLUCA SARAFIN SYRAH 75CL
+₺3,970.00
+DOLUCA SARAFIN SYRAH KADEH
+₺1,020.00
+K.DERE EGEO BLEND 75CL
+₺3,970.00
+K.DERE EGEO BLEND KADEH
+₺1,020.00
+K.DERE EGEO CAB. SAUV. 75CL
+₺4,570.00
+K.DERE EGEO CAB. SAUV. KADEH
+₺1,170.00
+K.DERE EGEO MERLOT 75CL
+₺4,530.00
+K.DERE EGEO MERLOT KADEH
+₺1,160.00
+K.DERE EGEO SYRAH 75CL
+₺3,030.00
+K.DERE EGEO SYRAH KADEH
+₺810.00
+K.DERE PENDORE OKUZGOZU 75CL
+₺4,750.00
+K.DERE PENDORE OKUZGOZU KADEH
+₺1,220.00
+K.DERE PENDORE SYRAH 75CL
+₺4,980.00
+K.DERE PENDORE SYRAH KADEH
+₺1,260.00
+K.DERE SEL.O.GOZU. B.KERE 75CL
+₺4,030.00
+K.DERE SEL.O.GOZU. B.KERE KADE
+₺1,010.00
+K.DERE YAKUT 75CL
+₺2,780.00
+K.DERE YAKUT KADEH
+₺760.00
+LIKYA KADYANDA OKUZGOZU 75CL
+₺2,870.00
+LIKYA KADYANDA OKUZGOZU KADEH
+₺740.00
+LIKYA KIZILBEL BLEND 75CL
+₺3,030.00
+LIKYA KIZILBEL BLEND KADEH
+₺740.00
+LIKYA KZL.CAB.SAV. B.KERE 75CL
+₺2,870.00
+LIKYA KZL.CAB.SAV. B.KERE KADE
+₺740.00
+LIKYA KZL.MER. SYR.O.GOZU 75CL
+₺2,870.00
+LIKYA KZL.MER. SYR.O.GOZU KADE
+₺740.00
+LIKYA VINE.CAB. SAUV. 75CL
+₺3,690.00
+LIKYA VINE.CAB. SAUV. KADEH
+₺890.00
+LIKYA VINEYARDS OKUZGOZU 75CL
+₺3,710.00
+LIKYA VINEYARDS OKUZGOZU KADEH
+₺890.00
+LYKOS VALLEY K.KARASI 75CL
+₺3,030.00
+LYKOS VALLEY K.KARASI KADEH
+₺740.00
+LYKOS VALLEY MERLOT 75CL
+₺2,870.00
+LYKOS VALLEY MERLOT KADEH
+₺740.00
+LYKOS VALLEY OKUZGOZU 75CL
+₺2,870.00
+LYKOS VALLEY OKUZGOZU KADEH
+₺740.00
+LYKOS VALLEY SYRAH 75CL
+₺2,870.00
+LYKOS VALLEY SYRAH KADEH
+₺740.00
+MONTES CABERNET SAUV. 75CL
+₺3,670.00
+MONTES CABERNET SAUV. KADEH
+₺920.00
+MONTES MALBEC 75CL
+₺3,707.00
+MONTES MALBEC KADEH
+₺910.00
+MONTES MERLOT 75CL
+₺3,710.00
+MONTES MERLOT KADEH
+₺920.00
+PICCINI CHIANTI 75CL
+₺3,170.00
+PICCINI CHIANTI KADEH
+₺810.00
+SUVLA CABERNET SAUVIGNON 75CL
+₺3,690.00
+SUVLA CABERNET SAUVIGNON KADEH
+₺890.00
+SUVLA KIRTE 75CL
+₺3,710.00
+SUVLA KIRTE KADEH
+₺870.00
+SUVLA MERLOT 75CL
+₺3,170.00
+SUVLA MERLOT KADEH
+₺810.00
+SUVLA OKUZGOZU BOGAZKERE 75CL
+₺2,870.00
+SUVLA OKUZGOZU BOGAZKERE KADEH
+₺740.00
+SUVLA REZERVE SYRAH 75CL
+₺6,340.00
+SUVLA REZERVE SYRAH KADEH
+₺1,440.00
+SUVLA SIR 75CL
+₺3,970.00
+SUVLA SIR KADEH
+₺1,010.00
+SUVLA SUR 75CL
+₺3,970.00
+SUVLA SUR KADEH
+₺670.00
+SUVLA SYRAH 75CL
+₺2,870.00
+SUVLA SYRAH KADEH
+₺740.00
+TERRA BOGAZKERE 75CL
+₺3,180.00
+TERRA BOGAZKERE KADEH
+₺810.00
+TERRA OKUZGOZU 75CL
+₺3,180.00
+TERRA OKUZGOZU KADEH
+₺810.00
+ROSE & BLUSH
+K.DERE EGEO ROSE 75CL
+₺3,630.00
+K.DERE EGEO ROSE KADEH
+₺890.00
+LAL K.DERE 75CL
+₺2,910.00
+LAL K.DERE KADEH
+₺780.00
+LIKYA ISINDA BLUSH 75CL
+₺2,870.00
+LIKYA ISINDA BLUSH KADEH
+₺780.00
+LYKOS VALLEY O.GOZU BLUSH 75CL
+₺2,870.00
+LYKOS VALLEY O.GOZU BLUSH KADE
+₺780.00
+SUVLA KARASAKIZ ROSE 75CL
+₺2,870.00
+SUVLA KARASAKIZ ROSE KADEH
+₺780.00
+VERONA BLUSH 75CL
+₺2,870.00
+VERONA BLUSH KADEH
+₺780.00
+VISKILER
+ARDBERG 70CL
+₺9,950.00
+ARDBERG DUBLE
+₺1,570.00
+ARDBERG TEK
+₺790.00
+BLACK LABEL 35CL
+₺3,650.00
+BLACK LABEL 70CL
+₺6,640.00
+BLACK LABEL DUBLE
+₺1,310.00
+BLACK LABEL TEK
+₺690.00
+BLUE LABEL 70CL
+₺31,670.00
+CAOL ILA 70CL
+₺11,120.00
+CAOL ILA DUBLE
+₺1,690.00
+CAOL ILA TEK
+₺860.00
+CHIVAS REGAL 12Y 70CL
+₺7,650.00
+CHIVAS REGAL 12Y DUBLE
+₺1,350.00
+CHIVAS REGAL 12Y TEK
+₺710.00
+CHIVAS REGAL 18Y 70CL
+₺10,730.00
+CHIVAS REGAL 18Y DUBLE
+₺1,970.00
+CHIVAS REGAL 18Y TEK
+₺1,020.00
+CHIVAS REGAL 35CL
+₺4,530.00
+GLEN FARCLAS 70CL
+₺4,530.00
+GLENMORANGIE 70CL
+₺7,550.00
+GLENMORANGIE DUBLE
+₺1,350.00
+GLENMORANGIE TEK
+₺690.00
+JACK DANIELS 35CL
+₺3,990.00
+JACK DANIELS 70CL
+₺6,790.00
+JACK DANIELS DUBLE
+₺1,210.00
+JACK DANIELS TEK
+₺620.00
+JAMESON 35CL
+₺3,490.00
+JAMESON 70CL
+₺6,980.00
+JONNY WALKER 18Y 70CL
+₺6,050.00
+JONNY WALKER GOLD RESERVE 70CL
+₺5,070.00
+RED LABEL 35CL
+₺3,170.00
+RED LABEL 70CL
+₺5,560.00
+RED LABEL DUBLE
+₺960.00
+RED LABEL TEK
+₺490.00
+SINGLETON 70CL
+₺8,750.00
+TALISKER 70CL
+₺8,750.00
+TALISKER DUBLE
+₺1,820.00
+TALISKER TEK
+₺910.00
+THE YAMAZAKI 70CL
+₺33,000.00
+THE YAMAZAKI DUBLE
+₺5,500.00
+THE YAMAZAKI TEK
+₺2,800.00
+SAMPANYA
+CINZANO PROSECCO 75CL
+₺6,040.00
+LEONA BUBBLE 75CL
+₺3,170.00
+MOET CHANDON IMPERIAL 75CL
+₺11,920.00
+VOTKA
+ABSOLUT 35CL
+₺3,170.00
+ABSOLUT 70CL
+₺5,290.00
+ABSOLUT DUBLE
+₺1,010.00
+ABSOLUT TEK
+₺530.00
+BELVEDERE 70CL
+₺9,520.00
+BELVEDERE DUBLE
+₺1,670.00
+BELVEDERE TEK
+₺830.00
+KETEL ONE 70CL
+₺7,940.00
+KETEL ONE DUBLE
+₺1,530.00
+KETEL ONE TEK
+₺760.00
+CIN
+GORDONS 100CL
+₺5,040.00
+GORDONS 70CL
+₺4,420.00
+GORDONS DUBLE
+₺950.00
+GORDONS TEK
+₺480.00
+TANQUERAY DRY GIN 70CL
+₺5,070.00
+TANQUERAY DRY GIN DUBLE
+₺960.00
+TANQUERAY DRY GIN TEK
+₺480.00
+TANQUERAY NO TEN 70CL
+₺6,350.00
+TANQUERAY NO TEN DUBLE
+₺1,270.00
+TANQUERAY NO TEN TEK
+₺640.00
+TEKILA
+OLMECA SILVER 70CL
+₺5,430.00
+OLMECA SILVER SHOT
+₺640.00
+LIKOR
+ARCHERS
+₺740.00
+BAILYS
+₺740.00
+JEST ACIBADEM
+₺740.00
+JEST NANE
+₺740.00
+JEST PORTAKAL
+₺740.00
+KOKTEYL
+BLUE KAMIKAZE
+₺1,130.00
+COSMOPOLITAN
+₺1,140.00
+CUBA LIBRE
+₺1,140.00
+GIN PASSION
+₺1,140.00
+LONG ISLAND ICE TEA
+₺1,140.00
+LYNCBURG LEMONADE
+₺1,140.00
+MARGARITA
+₺1,140.00
+MOJITO
+₺1,140.00
+PINE APPLE DREAM
+₺1,140.00
+SEX ON THE BEACH
+₺1,140.00
+TEQILA SUNRISE
+₺1,140.00
+WHISKEY SOUR
+₺1,140.00`;
+
+    const categoryOrder = [
+      "RAKILAR",
+      "BIRALAR",
+      "BEYAZ ŞARAPLAR",
+      "KIRMIZI ŞARAPLAR",
+      "ROSE & BLUSH",
+      "VISKILER",
+      "SAMPANYA",
+      "VOTKA",
+      "CIN",
+      "TEKILA",
+      "LIKOR",
+      "KOKTEYL"
+    ];
+
+    const iconByCategory = {
+      "RAKILAR": "glass-water",
+      "BIRALAR": "beer",
+      "BEYAZ ŞARAPLAR": "wine",
+      "KIRMIZI ŞARAPLAR": "wine",
+      "ROSE & BLUSH": "glass-water",
+      "VISKILER": "flask-conical",
+      "SAMPANYA": "sparkles",
+      "VOTKA": "glass-water",
+      "CIN": "martini",
+      "TEKILA": "citrus",
+      "LIKOR": "cup-soda",
+      "KOKTEYL": "martini"
+    };
+
+    const i18n = {
+      tr: {
+        heroTitle: "İçecek Menüsü",
+        heroSubtitle: "Butcha Steakhouse - Seçkin alkollü içecek koleksiyonu",
+        phone: "Telefon: +90 (5__) ___ __ __",
+        address: "Adres: [Adres Bilgisi Placeholder], Türkiye",
+        warning: "21 yaş altına alkollü içecek satışı yasaktır.",
+        social: "Sosyal Medya"
+      },
+      en: {
+        heroTitle: "Drinks Menu",
+        heroSubtitle: "Butcha Steakhouse - Curated alcoholic beverage collection",
+        phone: "Phone: +90 (5__) ___ __ __",
+        address: "Address: [Address Placeholder], Türkiye",
+        warning: "Sale of alcoholic beverages to persons under 21 is prohibited.",
+        social: "Social Media"
+      }
+    };
+
+    const categoryNameMap = {
+      "RAKILAR": "RAKIS",
+      "BIRALAR": "BEERS",
+      "BEYAZ ŞARAPLAR": "WHITE WINES",
+      "KIRMIZI ŞARAPLAR": "RED WINES",
+      "ROSE & BLUSH": "ROSE & BLUSH",
+      "VISKILER": "WHISKIES",
+      "SAMPANYA": "CHAMPAGNE",
+      "VOTKA": "VODKA",
+      "CIN": "GIN",
+      "TEKILA": "TEQUILA",
+      "LIKOR": "LIQUEUR",
+      "KOKTEYL": "COCKTAIL"
+    };
+
+    let currentLang = "tr";
+
+    function translateItemName(name) {
+      if (currentLang === "tr") return name;
+
+      const notes = [];
+      if (/\bTEK\b/.test(name)) notes.push("Single Serve");
+      if (/\bDUBLE\b/.test(name)) notes.push("Double Serve");
+      if (/\bKADEH\b|\bKADE\b/.test(name)) notes.push("By the Glass");
+      if (/\bSHOT\b/.test(name)) notes.push("Shot Serve");
+      if (/\bOZEL SERI\b/.test(name)) notes.push("Special Series");
+      if (/\bYENI SERI\b/.test(name)) notes.push("New Series");
+      if (/\bREZERV\b/.test(name)) notes.push("Reserve");
+
+      return notes.length ? `${name} (${notes.join(" • ")})` : name;
+    }
+
+    function displayCategoryName(name) {
+      return currentLang === "en" ? (categoryNameMap[name] || name) : name;
+    }
+
+    function applyStaticI18n() {
+      document.documentElement.lang = currentLang;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (i18n[currentLang][key]) el.textContent = i18n[currentLang][key];
+      });
+      document.title = currentLang === "en"
+        ? "Butcha Steakhouse | Drinks Menu"
+        : "Butcha Steakhouse | İçecek Menüsü";
+    }
+
+    const lines = rawMenu
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    const menuData = [];
+    let current = null;
+
+    for (let i = 0; i < lines.length; i += 1) {
+      const line = lines[i];
+      if (categoryOrder.includes(line)) {
+        current = { title: line, items: [] };
+        menuData.push(current);
+        continue;
+      }
+      if (!current) continue;
+      if (line.startsWith("₺")) continue;
+      const maybePrice = lines[i + 1];
+      if (maybePrice && maybePrice.startsWith("₺")) {
+        current.items.push({ name: line, price: maybePrice });
+        i += 1;
+      }
+    }
+
+    const nav = document.getElementById("categoryNav");
+    const root = document.getElementById("menuRoot");
+    const langTr = document.getElementById("langTr");
+    const langEn = document.getElementById("langEn");
+
+    function renderMenu() {
+      nav.innerHTML = "";
+      root.innerHTML = "";
+
+      menuData.forEach((category) => {
+      const id = "cat-" + category.title.toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9ğüşöçıİŞĞÜÖÇ]+/gi, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
+      const shownTitle = displayCategoryName(category.title);
+
+      const navLi = document.createElement("li");
+      navLi.innerHTML = `
+        <a href="#${id}" aria-label="${shownTitle} bölümüne git">
+          <i data-lucide="${iconByCategory[category.title] || "wine"}" aria-hidden="true"></i>
+          <span>${shownTitle}</span>
+        </a>`;
+      nav.appendChild(navLi);
+
+      const section = document.createElement("section");
+      section.className = "menu-section";
+      section.id = id;
+      section.innerHTML = `
+        <div class="section-title-wrap">
+          <div class="gold-line"></div>
+          <h2 class="section-title">
+            <i data-lucide="${iconByCategory[category.title] || "wine"}" aria-hidden="true"></i>
+            ${shownTitle}
+          </h2>
+          <div class="gold-line"></div>
+        </div>
+        <div class="items-grid" role="list" aria-label="${shownTitle} ürünleri">
+          ${category.items.map((item) => `
+            <article class="menu-item" role="listitem" aria-label="${translateItemName(item.name)} ${item.price}">
+              <div class="menu-item-line">
+                <span class="item-name">${translateItemName(item.name)}</span>
+                <span class="dots" aria-hidden="true"></span>
+                <span class="price">${item.price}</span>
+              </div>
+            </article>`).join("")}
+        </div>`;
+      root.appendChild(section);
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: "0px 0px -32px 0px" });
+
+      document.querySelectorAll(".menu-section").forEach((el) => observer.observe(el));
+    }
+
+    function setLang(lang) {
+      currentLang = lang;
+      langTr.classList.toggle("active", lang === "tr");
+      langTr.setAttribute("aria-pressed", String(lang === "tr"));
+      langEn.classList.toggle("active", lang === "en");
+      langEn.setAttribute("aria-pressed", String(lang === "en"));
+      applyStaticI18n();
+      renderMenu();
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    langTr.addEventListener("click", () => setLang("tr"));
+    langEn.addEventListener("click", () => setLang("en"));
+
+    setLang("tr");
+  </script>
+</body>
+</html>
